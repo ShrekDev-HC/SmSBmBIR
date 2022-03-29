@@ -1,7 +1,7 @@
 # SmSBmBIR
 Beta version
 # terminal requirements
-python3 => pkg install python3(termux) & apt-get install python3(Linux)__
+python3 => pkg install python3(termux) & apt-get install python3(Linux)_
 tor => pkg install tor(termux) & apt-get install tor(Linux)
 php7 => pkg install php7(teemux) & apt-get install php7(Linux)
 # python3 requirements
