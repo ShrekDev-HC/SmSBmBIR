@@ -1,2 +1,2 @@
-*.py linguist-detectable=true
-*.php linguist-detectable=false
+*.py eol=lf
+*.php eol=lf
