@@ -535,7 +535,7 @@ def main():
                 Popen(("pkill","tor"))
                 sys.exit()
         pass
-    questn = str(input("Do you want use tor service?(y/n)"))
+    questn = str(input(Fore.YELLOW+"Do you want use tor service?(y/n): "))
     if(questn == ""):
         input(Fore.RED+"empty(Press enter...)")
         rm()
