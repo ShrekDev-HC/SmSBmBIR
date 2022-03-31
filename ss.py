@@ -435,12 +435,10 @@ def apis(number):
     except:
         print("")
         pass
-        sys.exit()
-
+def rm():
+    for time in range(3):
+        os.remove(f"api/ss{time}.php")
 def start(number,thrd):
-    def rm():
-        for time in range(3):
-            os.remove(f"api/ss{time}.php")
     if(search(r'9\d{9}$', str(number))):
         for time in range(thrd):
             print(Fore.BLUE+"\rSending sms "+Fore.RED+f"{time+1}"+Fore.WHITE+"/"+Fore.GREEN+f"{thrd}", end='')
@@ -448,15 +446,27 @@ def start(number,thrd):
                 Thread(target=apis,args=(number,)).start()
             except KeyboardInterrupt:
                 input(Fore.RED+"(Press enter...)")
+                rm()
+                Popen(("pkill","php"))
+                Popen(("pkill","tor"))
                 sys.exit()
             except Traceback:
                 input(Fore.RED+"Something is wrong [2] (Press enter...)")
+                rm()
+                Popen(("pkill","php"))
+                Popen(("pkill","tor"))
                 sys.exit()
             except Exception:
                 input(Fore.RED+"Something is wrong [3] (Press enter...)")
+                rm()
+                Popen(("pkill","php"))
+                Popen(("pkill","tor"))
                 sys.exit()
             except:
                 input(Fore.RED+"Something is wrong [1] (Press enter...)")
+                rm()
+                Popen(("pkill","php"))
+                Popen(("pkill","tor"))
                 sys.exit()
             sleep(.3)
         input("\nExit (Press enter...)")
@@ -466,6 +476,9 @@ def start(number,thrd):
         sys.exit()
     else:
         print(Fore.RED+"invalid format of number.\nformat: 9xxxxxxxxx")
+        rm()
+        Popen(("pkill","php"))
+        Popen(("pkill","tor"))
         sys.exit()
 def main():
     banner()
@@ -504,18 +517,21 @@ def main():
         print(Fore.GREEN+"wait for run tor service!")
         thrdtor = 0
         while True:
-            sleep(.7)
+            sleep(1)
             thrdtor += 1
             a = open("log/TorLog","r")
             read = str(a.readlines())
             if(thrdtor == 100):
                 input(Fore.RED+"TOR CAN'T RUN!(press enter...)")
+                rm()
+                Popen(("pkill","tor"))
                 sys.exit()
             if("100" in read):
                 print(Fore.GREEN+"TOR IS RUNNING!")
                 break
             if("[err]" in read):
                 input(Fore.RED+"Something wrong\nplease try again!(press enter...)")
+                rm()
                 Popen(("pkill","tor"))
                 sys.exit()
         pass
