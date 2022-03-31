@@ -535,11 +535,16 @@ def main():
                 Popen(("pkill","tor"))
                 sys.exit()
         pass
-    tor()
+    questn = str(input("Do you want use tor service?(y/n)"))
+    if(questn == ""):
+        input(Fore.RED+"empty(Press enter...)")
+        rm()
+        sys.exit()
+    elif(questn == "y" or questn == "yes"):
+        tor()
     def server():
         with open("log/ServerLog","w") as log:
             Popen(("php","-S","localhost:5050"),stderr=log,stdout=log)
-    
     server()
     start(number,thrd)
 if __name__ == "__main__":
