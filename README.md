@@ -11,3 +11,10 @@ re<br/>
 colorama<br/>
 subprocess<br/>
 requests<br/>
+
+
+
+# 💻 Tech Stack:
+![PY](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![](https://github-readme-stats.vercel.app/api/top-langs/?username=ShrekDev-HC&theme=dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact)
+
